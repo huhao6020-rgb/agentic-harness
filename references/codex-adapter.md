@@ -21,7 +21,7 @@ Codex 项目使用 `AGENTS.md`。不要在用户选择 Codex-only 时强制创�
 ## `AGENTS.md` 应该写什么
 
 - 平台和项目级 skills 路径。
-- 启动顺序：`INDEX.md`、`ACTIVE.md`、`prd-gate.md`、`spec-system.md`、`graphify.md`。
+- 启动顺序：`INDEX.md`、`ACTIVE.md`、`prd-gate.md`、`spec-system.md`、`graphify.md`；长跑任务再读 `TASKS.md`、`task-runner.md`、`handoff.md`。
 - 深聊对齐门禁。
 - OpenSpec / Spec-Kit 二选一。
 - Graphify、UI/UX、debugging、多代理、验证路由。
@@ -34,15 +34,19 @@ Codex 项目使用 `AGENTS.md`。不要在用户选择 Codex-only 时强制创�
 3. `prd-gate.md` 是否 aligned；medium 以上未 aligned 不进入实现。
 4. `spec-system.md` 是否选择唯一规范系统。
 5. `ACTIVE.md` 是否有允许写入范围和验证标准。
+6. 长跑任务是否存在 `TASKS.md`，并且没有未处理的 `ready` / `verify_failed` task。
 
 ## 长任务
 
-Codex 官方 `/goal` 只在 large / greenfield / 多模块任务中使用，并且必须已有：
+Codex 默认使用 `docs/agentic-dev/TASKS.md` 驱动长跑。官方 `/goal` 只在用户显式要求时作为兼容层，并且必须已有：
 
 - PRD 或等价深聊记录。
-- tasks。
-- verification matrix。
+- `TASKS.md`。
+- `task-runner.md`。
+- `verification-matrix.md`。
 - write scope。
 - stop conditions。
+
+执行时优先处理 `verify_failed`，再处理最高优先级 `ready`。只要队列中存在 `ready` 或 `verify_failed`，不得声称整体完成。
 
 不要创建自定义 `.codex/goals` 或 `.codex/tasks`。

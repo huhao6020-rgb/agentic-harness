@@ -14,7 +14,8 @@
 | bug、异常、测试失败、性能问题 | systematic-debugging | 先复现或明确现象 |
 | 新功能或 bugfix 实现 | test-driven-development | 用户未要求跳过时默认使用 |
 | 多步骤实现计划 | writing-plans | 需求和验收已明确 |
-| 多代理协作 | subagent-driven-development | 有 tasks、write scope、独立 verifier |
+| 多代理协作 | subagent-driven-development | 有 `TASKS.md`、write scope、独立 verifier |
+| 长跑、继续开发、测试失败回流 | Task Queue Harness | 读 `task-runner-loop.md`，以 `TASKS.md` 为事实源 |
 | 完成前 | verification-before-completion | 必须有验证命令或等价证据 |
 | 外部搜索 | web / 当前环境可用搜索能力 | 不写入项目依赖 |
 
@@ -39,5 +40,5 @@
 ## 禁止
 
 - 不把 `agent-reach` 当项目级依赖。
-- 不为小任务启用多代理、`/goal`、Spec-Kit 或 OpenSpec。
+- 不为小任务启用多代理、Task Queue、Spec-Kit 或 OpenSpec。
 - 不在 PRD 门禁未通过时启动长跑执行。

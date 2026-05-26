@@ -165,6 +165,7 @@ docs/agentic-dev/skill-manifest.md
 
 - 创建平台无关状态层和记忆层。
 - 创建 `bootstrap-report.md`、`skill-manifest.md`、`prd-gate.md`、`spec-system.md`、`graphify.md`。
+- greenfield 或用户要求长跑时，创建 Task Queue Harness 入口。
 
 产物：
 
@@ -180,6 +181,12 @@ docs/agentic-dev/
   skill-manifest.md
   prd-gate.md
   decisions.md
+  TASKS.md
+  task-runner.md
+  handoff.md
+  verification-matrix.md
+  tasks/
+    README.md
 memory/
   project.md
   decisions.md
@@ -193,6 +200,7 @@ memory/
 - 必需文件存在且标题为简体中文。
 - `project-structure.md` 是目录结构唯一来源。
 - `ACTIVE.md` 写明当前阶段、下一步、允许写入范围、阻塞项。
+- `TASKS.md` 写明任务状态规则；`task-runner.md` 写明执行循环；`handoff.md` 写明恢复入口。
 
 失败处理：
 
@@ -212,6 +220,7 @@ memory/
 - Claude Code 创建结构化 `CLAUDE.md`。
 - 双平台时 `CLAUDE.md` 只导入 `@AGENTS.md` 并写 Claude 适配。
 - 入口规则必须包含“初始化阶段报告”入口。
+- 入口规则必须包含“任务队列长跑协议”入口。
 
 产物：
 
@@ -225,6 +234,7 @@ CLAUDE.md
 - Codex `AGENTS.md` 写明项目级 skills 位于 `.agents/skills/`，不是 `.codex/skills`。
 - 入口规则包含“项目自定义规则”区。
 - 入口规则包含 `docs/agentic-dev/bootstrap-report.md`。
+- 入口规则包含 `docs/agentic-dev/TASKS.md`、`task-runner.md`、`handoff.md`、`verification-matrix.md`。
 - 入口规则不堆临时任务历史。
 
 失败处理：
@@ -280,6 +290,7 @@ openspec/
 - 检查项目级 skill 的 `SKILL.md`。
 - 检查 `skill-manifest.md` 状态。
 - 检查入口规则是否引用阶段报告、PRD 门禁、规范系统和 Graphify。
+- 检查入口规则是否引用 Task Queue Harness，并声明 `ready` / `verify_failed` 不得整体完成。
 - 输出最终阶段报告和下一步。
 
 验收：
@@ -288,6 +299,7 @@ openspec/
 - Codex 项目没有误建 `.codex/skills`。
 - 只有 README 的 skill 目录不算 installed。
 - pending / blocked 项清楚写明用户需要做什么。
+- 长跑入口存在且可恢复：`TASKS.md`、`task-runner.md`、`handoff.md`、`verification-matrix.md`。
 
 失败处理：
 

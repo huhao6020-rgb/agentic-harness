@@ -17,7 +17,9 @@ Claude-only 项目：
 ## 启动规则
 - 先读 `docs/agentic-dev/INDEX.md` 和 `ACTIVE.md`。
 - 检查 `prd-gate.md`、`spec-system.md`、`graphify.md`、`skill-manifest.md`。
+- 长跑任务读取 `TASKS.md`、`task-runner.md`、`handoff.md`、`verification-matrix.md`。
 - medium / large / greenfield 未完成深聊对齐，不得进入实现。
+- 存在 `ready` 或 `verify_failed` task 时不得声称整体完成。
 - 未验证不得声称完成。
 ```
 
@@ -55,3 +57,8 @@ Claude-only 项目：
 3. `prd-gate.md` 是否 aligned。
 4. `spec-system.md` 是否选择唯一规范系统。
 5. `ACTIVE.md` 是否有允许写入范围和验证标准。
+6. 长跑任务是否有 `TASKS.md` 和可恢复的 `handoff.md`。
+
+## `/loop` 适配
+
+Claude Code 可以用 `.claude/loop.md` 调用同一套 Task Runner Loop。`loop.md` 不保存任务事实，只写“读取 `TASKS.md` 并执行下一个 `ready` 或 `verify_failed` task”的提示。任务状态仍放 `docs/agentic-dev/`。

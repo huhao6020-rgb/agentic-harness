@@ -15,7 +15,7 @@
 - 当前约束是什么。
 - 需要先探索还是可以直接实现。
 
-如果这些问题不清楚，不要直接进入 Graphify、OpenSpec、Spec-Kit、官方 `/goal` 或多代理流程。
+如果这些问题不清楚，不要直接进入 Graphify、OpenSpec、Spec-Kit、Task Queue 长跑或多代理流程。
 
 ## 用户也不清楚时
 
@@ -38,6 +38,7 @@
 2. 判断是纠正目标、追加需求，还是排队后续任务。
 3. 更新 `docs/agentic-dev/ACTIVE.md`、plan、tasks 或 handoff。
 4. 如果新方向与旧目标冲突，先确认。
+5. 如果用户要求“记录一下”或“以后按这个来”，按 `rules-and-memory.md` 的上下文同步协议判断是否同步到 `AGENTS.md` / `CLAUDE.md`。
 
 不要继续执行旧方向来“完成计划”。计划服务于目的，不是目的本身。
 
@@ -54,8 +55,9 @@
 
 - 临时想法：写入当前 run 或 handoff。
 - 当前目标状态：写入 `docs/agentic-dev/ACTIVE.md`。
-- 当前计划与任务：写入 `docs/agentic-dev/plans/` 和 `tasks/`。
+- 当前计划与任务：写入 `docs/agentic-dev/TASKS.md`、`tasks/` 或 `handoff.md`。
 - 稳定项目事实：写入 `memory/`。
 - 稳定约束或工作方式：必要时写入 `AGENTS.md`。
+- 未确认偏好或一次性想法：写入 `ACTIVE.md` 的待确认项。
 
 不要把一次性偏好或未验证猜测写入规则层。

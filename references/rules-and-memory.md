@@ -51,25 +51,27 @@
 5. `docs/agentic-dev/spec-system.md`
 6. `docs/agentic-dev/project-structure.md`
 7. `docs/agentic-dev/graphify.md`
-8. 与当前任务相关的 `memory/` 或 `docs/prd/`
+8. 中大型或长跑任务相关的 `docs/agentic-dev/TASKS.md`、`task-runner.md`、`handoff.md`、`verification-matrix.md`
+9. 与当前任务相关的 `memory/` 或 `docs/prd/`
 
 ## 4. 语言与沟通
 - 项目说明、计划、记忆、交接、验证记录默认使用简体中文。
 - 文件名、命令、API、包名和工具名保留英文。
 - 需求不清时先复述理解，再问关键问题，不直接实现。
 - 中途用户改变方向时，先更新 `ACTIVE.md` / `prd-gate.md` / spec 状态，再继续。
+- 用户要求“记录一下”“总结当前确认内容”“以后都按这个来”时，按“上下文同步与规则沉淀”判断写入位置。
 
 ## 5. 目的与深聊门禁
 - tiny / small：确认一句话目标、范围、验收点。
 - medium / large / greenfield：必须先用 `prd-test-writer` 或等价流程完成 PRD、用户故事、验收标准和测试基准。
-- 未完成深聊对齐，不允许 `/goal`、多代理、Spec-Kit implement 或 OpenSpec apply。
+- 未完成深聊对齐，不允许 Task Queue 长跑、多代理、Spec-Kit implement 或 OpenSpec apply。
 - PRD 门禁状态以 `docs/agentic-dev/prd-gate.md` 为准。
 
 ## 6. 三场景开发路由
 - 场景一：原有项目迭代、bug 修复，默认轻量；bug/性能/测试失败走 systematic-debugging。
 - 场景二：当前项目单模块开发，先 Graphify 看边界，再 PRD 门禁，再 OpenSpec。
 - 场景三：全新项目，先平台选择和 bootstrap，再 PRD 门禁，再 Spec-Kit。
-- 小 bug、小文案、小配置不创建 PRD、Spec、goal、多代理或 run ledger。
+- 小 bug、小文案、小配置不创建 PRD、Spec、Task Queue、多代理或 run ledger。
 
 ## 7. 规范系统
 - 场景一/二 medium 以上按需 OpenSpec。
@@ -103,10 +105,14 @@
 - 多代理协作：subagent-driven-development，且必须有 tasks、write scope、verifier。
 - 完成前：verification-before-completion。
 
-## 11. 多代理与长任务
-- 多代理必须先有任务清单、互不重叠的 write scope 和独立 verifier。
-- `/goal` 只用于 large / greenfield / 多模块任务。
-- 长任务每轮结束必须更新 `ACTIVE.md`：当前进度、验证结果、阻塞项和下一步。
+## 11. 任务队列、多代理与长跑
+- 长跑默认使用 `docs/agentic-dev/TASKS.md`，不是 `/goal`。
+- `TASKS.md` 是唯一任务队列事实源；`task-runner.md` 是执行协议；`handoff.md` 是恢复入口。
+- 只要存在 `ready` 或 `verify_failed` task，不得声称整体完成。
+- 测试失败必须回流为 `verify_failed` 或拆分新的 `ready` task。
+- 多代理必须从 `TASKS.md` 领取任务，且有互不重叠的 write scope 和独立 verifier。
+- `/goal` 只在用户显式要求时使用，且仍必须以 `TASKS.md` 为事实源。
+- 长任务每轮结束必须更新 `ACTIVE.md`、`TASKS.md`、`verification-matrix.md` 和 `handoff.md`。
 - 不创建自定义 `.codex` goal、memory 或 tasks 目录。
 
 ## 12. 验证与完成标准
@@ -115,7 +121,15 @@
 - 无法验证时必须说明原因、风险和下一步。
 - 完成后按需更新 `ACTIVE.md`、`prd-gate.md`、`spec-system.md`、`memory/`。
 
-## 13. 记忆写入规则
+## 13. 上下文同步与规则沉淀
+- `AGENTS.md` / `CLAUDE.md` 不是聊天纪要，只保存稳定操作规则、入口索引和硬门禁。
+- 当前阶段、下一步、临时阻塞、当前 task 状态写入 `ACTIVE.md`、`TASKS.md` 或 `handoff.md`。
+- 长期项目事实、模块边界、技术决策写入 `memory/`。
+- 稳定工作方式、长期限制、项目禁区、目录规则、平台路径、完成标准写入 `AGENTS.md` / `CLAUDE.md`。
+- 不确定是否稳定时，先写入 `ACTIVE.md` 的“待确认同步项”，不要直接污染入口规则。
+- 每次用户要求记录共识后，必须说明：写入了哪里、为什么、哪些没有写入入口规则。
+
+## 14. 记忆写入规则
 - `memory/project.md`：长期项目事实、产品定位、技术栈、运行命令。
 - `memory/decisions.md`：重要取舍、原因、日期、影响范围。
 - `memory/constraints.md`：安全、性能、兼容性、业务禁区。
@@ -123,7 +137,7 @@
 - `memory/modules/<module>.md`：模块边界、入口、依赖、验证方式。
 - 没有实质性新进展时，不要为了更新而改 memory。
 
-## 14. 项目自定义规则
+## 15. 项目自定义规则
 把只属于本项目的规则写在这里，例如：
 
 - 业务禁区：
@@ -136,7 +150,7 @@
 - 部署规则：
 - 不可接受结果：
 
-## 15. 禁止事项
+## 16. 禁止事项
 - 不要跳过 PRD 门禁直接长跑。
 - 不要混用 OpenSpec 和 Spec-Kit。
 - 不要绕过 `project-structure.md` 新建结构。
@@ -182,6 +196,32 @@ Claude-only 项目使用同样的结构，只把平台入口改为：
 ```
 
 用户给出的项目约束优先写入 `AGENTS.md` / `CLAUDE.md` 的“项目自定义规则”；较长的事实写入 `memory/constraints.md` 或相关模块记忆。
+
+## 上下文同步协议
+
+当用户中途补充信息，尤其是说“帮我记录一下”“总结当前确认内容”“避免上下文太长忘记”“以后都按这个来”“这是项目规则”时，先判断信息归属，再写入对应位置：
+
+| 信息类型 | 写入位置 | 不写入 |
+| --- | --- | --- |
+| 稳定工作方式、长期限制、项目禁区、目录规则、平台路径、完成标准 | `AGENTS.md` / `CLAUDE.md` | 临时聊天摘要 |
+| 当前阶段、下一步、临时阻塞、当前 task 状态 | `ACTIVE.md` / `TASKS.md` / `handoff.md` | 入口规则 |
+| 长期项目事实、模块边界、技术决策 | `memory/` | 临时 todo |
+| 未确认偏好、猜测、一次性想法 | `ACTIVE.md` 的“待确认同步项” | `AGENTS.md` |
+
+同步步骤：
+
+1. 复述本次要记录的共识。
+2. 判断每条信息是稳定规则、当前状态、长期事实还是待确认项。
+3. 按表写入对应文件。
+4. 如果改了 `AGENTS.md` / `CLAUDE.md`，避免复制整段聊天，只写可长期执行的规则。
+5. 最终回复必须列出同步结果：写入了哪里、为什么、哪些没有写入入口规则。
+
+示例：
+
+- “以后新项目都用 Task Queue，不用 goal”：写入 `AGENTS.md` / `CLAUDE.md` 的长跑规则。
+- “当前 T003 卡在 Playwright 安装失败”：写入 `ACTIVE.md` / `handoff.md`。
+- “禁止新建平行 apps 目录”：写入入口规则，并同步 `project-structure.md` 或 `memory/constraints.md`。
+- “这个 UI 风格更高级，先记一下”：未确认时写 `ACTIVE.md` 待确认；用户明确“以后都这样”才写入口规则。
 
 ## `memory/` 结构
 

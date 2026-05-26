@@ -40,11 +40,11 @@
 - tiny：不创建新文档，只做最小验证。
 - small：可写简短 plan / verification。
 - medium：可用 `prd-test-writer` + OpenSpec。
-- large：允许官方 `/goal`、run ledger、scoped subagents。
+- large：允许 Task Queue Harness、verification matrix、scoped subagents；`/goal` 仅显式可选。
 
 禁止：
 
-- 小 bug 不创建 PRD、Spec-Kit、OpenSpec、`/goal` 或多代理。
+- 小 bug 不创建 PRD、Spec-Kit、OpenSpec、Task Queue 或多代理。
 - 不默认启用 Spec-Kit。
 - 需求不清时不直接改代码。
 
@@ -64,7 +64,7 @@
 -> Graphify 查询模块边界和相邻依赖
 -> prd-test-writer 完成 PRD / 用户故事 / 验收 / 测试基准
 -> OpenSpec 定义变更
--> plan / tasks / verification
+-> TASKS.md / 单任务文件 / verification-matrix
 -> scoped subagents 按互不重叠 write scope 执行
 -> 独立 verifier 验证
 -> 更新 memory/modules/<module>.md
@@ -75,7 +75,8 @@
 ```text
 docs/prd/
 docs/agentic-dev/plans/<module>.md
-docs/agentic-dev/tasks/<module>.md
+docs/agentic-dev/TASKS.md
+docs/agentic-dev/tasks/<task-id>.md
 docs/agentic-dev/verification/<module>.md
 memory/modules/<module>.md
 openspec/
@@ -103,10 +104,11 @@ openspec/
 -> 项目级 bootstrap
 -> prd-test-writer 深聊产品目标、用户故事、验收标准、测试基准
 -> Spec-Kit constitution / specify / clarify / plan / tasks
+-> 创建 TASKS.md / task-runner.md / handoff.md / verification-matrix.md
 -> 创建基础代码或文档骨架
 -> Graphify 生成或记录待生成状态
 -> UI 任务进入 ui-ux-pro-max
--> 执行 / 多代理 / 官方 /goal
+-> Task Queue Harness 执行 / scoped subagents
 -> 验证
 -> 更新 ACTIVE、prd-gate、spec-system、memory
 ```
@@ -124,6 +126,11 @@ docs/agentic-dev/spec-system.md
 docs/agentic-dev/skill-manifest.md
 docs/agentic-dev/prd-gate.md
 docs/agentic-dev/decisions.md
+docs/agentic-dev/TASKS.md
+docs/agentic-dev/task-runner.md
+docs/agentic-dev/handoff.md
+docs/agentic-dev/verification-matrix.md
+docs/agentic-dev/tasks/
 memory/project.md
 memory/decisions.md
 memory/constraints.md
@@ -138,6 +145,7 @@ memory/modules/
 - 新项目默认初始化 OpenSpec。
 - 同时初始化 OpenSpec 和 Spec-Kit。
 - 创建自定义 `.codex` goal、memory 或 tasks 目录。
+- 把首轮 mock 或 smoke 通过当作整体完成。
 - 把 `.uv-cache`、`.pytest_cache`、`node_modules` 等缓存当成项目结构。
 
 ## 快速判断

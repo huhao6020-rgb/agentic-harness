@@ -8,11 +8,11 @@
 
 | 级别 | 典型任务 | 允许产物 | 禁止 |
 | --- | --- | --- | --- |
-| tiny | 文案、样式微调、单行配置 | 最终说明和验证 | PRD、Spec、goal、多代理 |
+| tiny | 文案、样式微调、单行配置 | 最终说明和验证 | PRD、Spec、Task Queue、多代理 |
 | small | 小 bug、小迭代 | 简短计划或验证记录 | Spec-Kit、OpenSpec、run ledger |
 | medium | 明确模块/行为变更 | `prd-gate.md`、PRD、OpenSpec、plan/tasks | 无 PRD 就执行 |
-| large | 多文件、多模块、长任务 | PRD、Spec、verification matrix、`/goal`、scoped subagents | 无 verifier 的多代理 |
-| greenfield | 全新项目 | bootstrap、PRD、Spec-Kit、memory | 未确认平台就初始化 |
+| large | 多文件、多模块、长任务 | PRD、Spec、Task Queue、verification matrix、scoped subagents | 无 verifier 的多代理 |
+| greenfield | 全新项目 | bootstrap、PRD、Spec-Kit、Task Queue、memory | 未确认平台就初始化 |
 
 ## 场景绑定
 
@@ -27,7 +27,7 @@
 - 用户目的或验收标准需要深聊。
 - 影响接口、数据、权限、状态流或多个模块。
 - 需要 UI/UX 判断和浏览器验收。
-- 需要无人值守长跑、`/goal` 或多代理。
+- 需要无人值守长跑、任务队列循环或多代理。
 
 ## 降级条件
 
@@ -43,3 +43,5 @@
 - 不能为了显得完整给小任务生成大量文档。
 - 不能为了省事让大任务跳过 PRD 门禁。
 - 不能把“跑了 30 分钟”当作完成证据。
+- 不能把首轮 `smoke-pass` 当作整体完成。
+- `/goal` 只能显式启用，默认长跑使用 Task Queue Harness。

@@ -50,6 +50,12 @@ docs/
     skill-manifest.md
     prd-gate.md
     decisions.md
+    TASKS.md
+    task-runner.md
+    handoff.md
+    verification-matrix.md
+    tasks/
+      README.md
 memory/
   project.md
   decisions.md
@@ -69,7 +75,7 @@ docs/prd/
 docs/PRD_REGISTRY.md
 ```
 
-`plans/`、`tasks/`、`runs/`、`verification/` 只在 medium / large / greenfield 进入执行、官方 `/goal` 续跑、多代理协作或需要验证矩阵时创建。
+`TASKS.md`、`task-runner.md`、`handoff.md`、`verification-matrix.md` 是 greenfield 或 long-running 初始化的默认产物。`plans/`、`runs/` 和额外验证目录只在确有需要时创建。
 
 ## Bootstrap 必写内容
 
@@ -82,6 +88,7 @@ docs/PRD_REGISTRY.md
 - 深聊对齐状态：`prd-gate.md`。
 - Graphify 状态：已生成、待生成、需安装、用户暂缓或失败。
 - 唯一规范系统：场景三默认 Spec-Kit；不得同时初始化 OpenSpec。
+- 任务队列状态：`TASKS.md` 是唯一任务队列事实源；`task-runner.md` 是执行协议；`handoff.md` 是恢复入口。
 - 完成标准：测试、构建、lint、浏览器验收、OpenSpec verify 或等价证据。
 
 ## 深聊门禁

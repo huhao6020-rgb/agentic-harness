@@ -21,7 +21,7 @@
 2. 读取 `docs/agentic-dev/INDEX.md` 和 `ACTIVE.md`。
 3. 检查 `prd-gate.md`、`spec-system.md`、`graphify.md` 和 `skill-manifest.md`。
 4. 判断用户请求属于三场景中的哪一类。
-5. 根据复杂度决定是否需要 PRD、Spec、`/goal` 或多代理。
+5. 根据复杂度决定是否需要 PRD、Spec、Task Queue Harness 或多代理；`/goal` 只在用户显式要求时作为兼容层。
 
 ## 三种运行链路
 
@@ -42,7 +42,7 @@
 Graphify 查询边界
 -> prd-test-writer 深聊模块目标和测试基准
 -> OpenSpec 变更规范
--> plan / tasks / verification
+-> TASKS.md / 单任务文件 / verification-matrix
 -> scoped subagents
 -> 独立 verifier
 -> memory/modules 写回
@@ -57,7 +57,8 @@ Graphify 查询边界
 -> Spec-Kit
 -> 基础代码骨架
 -> Graphify
--> UI/UX / 实现 / 多代理 / goal
+-> TASKS.md / task-runner / handoff
+-> UI/UX / 实现 / 多代理
 -> 验证
 -> ACTIVE / prd-gate / memory 写回
 ```
@@ -69,8 +70,10 @@ Graphify 查询边界
 - 规范系统状态写 `spec-system.md`。
 - 工具安装状态写 `skill-manifest.md`。
 - 长期事实写 `memory/`。
-- 运行记录、验证矩阵、任务清单只在 medium / large / greenfield 按需创建。
+- medium / large / greenfield 的长跑状态写 `TASKS.md`、`task-runner.md`、`handoff.md` 和 `verification-matrix.md`。
 
 ## 完成定义
 
 完成不是“做完计划”，而是“用户目的被可验证地达成”。未验证时只能说明待验证项，不能声称完成。
+
+只要任务队列中仍有 `ready` 或 `verify_failed` task，就不得声称整体完成。`smoke-pass` 只能证明当前 task 通过，不能代表项目结束。

@@ -11,14 +11,14 @@
 | tiny | 一句话目标 + 最小验收点 | 用户目标清楚，影响范围极小 |
 | small | 目标、范围、非范围、验收点 | 可以直接验证，不影响架构边界 |
 | medium | 使用 `prd-test-writer` 或等价流程 | PRD、用户故事、验收标准、测试基准明确 |
-| large | `prd-test-writer` + plan/tasks + verification matrix | 可恢复、可分工、可验证 |
+| large | `prd-test-writer` + TASKS.md + verification matrix | 可恢复、可分工、可验证 |
 | greenfield | `prd-test-writer` 先于 Spec-Kit | 产品目标、用户、场景、成功标准、非目标明确 |
 
 ## 何时必须使用 `prd-test-writer`
 
 - 用户说“优化”“构建”“重做”“不好用”“做一个产品/应用”，但目标或验收不清。
 - 涉及产品行为、用户故事、页面流程、交互体验、业务规则或测试基准。
-- 任务准备进入 OpenSpec、Spec-Kit、官方 `/goal`、多代理或长时间无人值守执行。
+- 任务准备进入 OpenSpec、Spec-Kit、Task Queue 长跑、多代理或长时间无人值守执行。
 - 需要把需求转化为可执行测试用例或验收矩阵。
 
 `prd-test-writer` 的产物是上游事实源：
@@ -26,7 +26,7 @@
 ```text
 PRD -> Spec-Kit / OpenSpec
 测试用例 -> verification matrix
-用户故事 -> tasks
+用户故事 -> TASKS.md / 单任务文件
 验收标准 -> Done Means
 Review 问题 -> 下一轮 PRD / Spec 修订
 ```
@@ -72,7 +72,7 @@ docs/agentic-dev/prd-gate.md
 
 - 用户目标只能描述为“感觉不好”“优化一下”“做得高级点”，但没有可验证结果。
 - medium / large / greenfield 没有 PRD 或等价对齐记录。
-- 要启动 `/goal`、多代理、Spec-Kit implement 或 OpenSpec apply，但没有验收标准。
+- 要启动 Task Queue 长跑、多代理、Spec-Kit implement 或 OpenSpec apply，但没有验收标准。
 - `prd-test-writer` 缺失且用户未同意降级为手动对齐。
 
 ## 降级方式
